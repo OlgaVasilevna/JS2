@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins|Walter+Turncoat&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1 id="header_title">интернет магазин</h1>
+            <div class="search">
+                <input type="text" v-model="searchLine">
+                <button @click="search">Поиск</button>
+            </div>
+            
+            <button @click="visible" class="cart-button">корзина</button>
+            <div v-if="isVisibleCart" class="cart">
+                <div v-for="good in cart" class="cart-item" >   
+                    <img src="https://via.placeholder.com/100" alt="alt">
+                    <div class="wrapper_cart">
+                        <h3> {{ good.product_name }} </h3>
+                        <p class="quantity">x{{good.quantity}}</p>
+                        <p class="price"> {{ good.price }} </p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+
+                <div v-if="filteredGoods.length != 0" class="goods-list">
+                    <div v-for="good in filteredGoods" class="goods-item"  :key="good.id_product">
+                        <img src="https://via.placeholder.com/180" alt="alt">
+                        <h3> {{good.product_name}}</h3>
+                        <div class="wrapper">
+                            <p class="price"> {{ good.price }}</p>
+                            <button @click="addCart(good.id_product)" class="btn-bye">В корзину</button>
+                        </div>
+                    </div>
+                </div>
+        
+            <div v-else class="goods-list"> Нет данных </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
